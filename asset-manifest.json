@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Select-Random-Country-App-React/static/css/main.b195200c.css",
+    "main.js": "/Select-Random-Country-App-React/static/js/main.8ef90674.js",
+    "index.html": "/Select-Random-Country-App-React/index.html",
+    "main.b195200c.css.map": "/Select-Random-Country-App-React/static/css/main.b195200c.css.map",
+    "main.8ef90674.js.map": "/Select-Random-Country-App-React/static/js/main.8ef90674.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b195200c.css",
+    "static/js/main.8ef90674.js"
+  ]
+}
