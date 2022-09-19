@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import flagImage from './images/arg-flag.png'
-
+import countries from './data/countries_data_old.js'
 
 // class based component
 class Header extends React.Component {
@@ -54,23 +53,9 @@ const buttonStyles = {
   cursor: 'pointer',
   fontSize: 18,
   color: 'white',
+  userSelect: 'none',
 }
 
-//Country Box component
-const CountryBox = () => (
-  <div className='country-box'>
-    <div className='top-box'>
-      <img src={flagImage} alt='flag' style={{width: '7rem', marginTop: '.5rem'}}/>
-      <h4 className='main-title'>Argentina</h4>
-    </div>
-    <div className='bottom-box'>
-      <p className='country-txt'>Capital: <span className='country-span-txt'>Buenos Aires</span></p>
-      <p className='country-txt'>Language: <span className='country-span-txt'>Espanol</span></p>
-      <p className='country-txt'>Population: <span className='country-span-txt'>45M</span></p>
-      <p className='country-txt'>Currency: <span className='country-span-txt'>Peso</span></p>
-    </div>
-  </div>
-)
 
 //Main Component
 class Main extends React.Component {
@@ -81,10 +66,29 @@ class Main extends React.Component {
     const {
       selectCountry,
     } = this.props
+    const {
+      flagImage,
+      country,
+      capital,
+      language,
+      population,
+      currency,
+    } = this.props.maindata
     return(
       <main className='main'>
         <div className='main-wrapper'>
-          <CountryBox />
+          <div className='country-box'>
+            <div className='top-box'>
+              <img src={flagImage} alt='flag' style={{width: '100px', height:'70px', marginTop: '.5rem'}}/>
+              <h4 className='main-title'>{country}</h4>
+            </div>
+            <div className='bottom-box'>
+              <p className='country-txt'>Capital: <span className='country-span-txt'>{capital}</span></p>
+              <p className='country-txt'>Language: <span className='country-span-txt'>{language}</span></p>
+              <p className='country-txt'>Population: <span className='country-span-txt'>{population}</span></p>
+              <p className='country-txt'>Currency: <span className='country-span-txt'>{currency}</span></p>
+            </div>
+          </div>
           <Button 
             text='Select Country'
             style={buttonStyles}
@@ -115,11 +119,33 @@ class Footer extends React.Component {
 
 class App extends React.Component {
   state = {
-
+    maindata: {
+      flagImage: countries[10].flag,
+      country: countries[10].name,
+      capital: countries[10].capital,
+      language: countries[10].languages.join(', '),
+      population: countries[10].population,
+      currency: countries[10].currency,
+    }
   }
   //method to select a country
   selectCountry = () => {
-    console.log('button clicked')
+    //250 length -- 250 countries
+    //console.log(countries.length)
+    //console.log(this.randomNum())
+    const randomNumber = this.randomNum();
+    let flag = countries[randomNumber].flag
+    let name = countries[randomNumber].name
+    let capital = countries[randomNumber].capital
+    let lang = countries[randomNumber].languages.join(', ')
+    let popu = countries[randomNumber].population
+    let curr = countries[randomNumber].currency
+    //console.log(flag, name, capital, lang, popu, curr)
+    this.setState({ maindata: {flagImage: flag, country: name, capital: capital, language: lang, population: popu, currency: curr}})
+    //console.log(this.state)
+  }
+  randomNum = () => {
+    return Math.floor(Math.random()*251);
   }
   render() {
     const data = {
@@ -131,7 +157,15 @@ class App extends React.Component {
         lastName: 'Rico',
       },
       date: 'Sep 18, 2022',
-      select: 'Select a country for your next holiday'
+      select: 'Select a country for your next holiday',
+    }
+    const maindata = { 
+      flagImage: countries[10].flag,
+      country: countries[10].name,
+      capital: countries[10].capital,
+      language: countries[10].languages,
+      population: countries[10].population,
+      currency: countries[10].currency,
     }
     return (
       <div className='app'>
@@ -139,11 +173,10 @@ class App extends React.Component {
           <Header data={data} />
         </div>
         <Main 
+          maindata={this.state.maindata}
           selectCountry={this.selectCountry}
         />
-        <div className='footer-div'>
-          <Footer />
-        </div>
+        <Footer />
       </div>
     )
   }  
