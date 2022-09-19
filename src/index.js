@@ -149,7 +149,7 @@ class App extends React.Component {
   }
   render() {
     const data = {
-      welcome: 'Welcome to 30 Days Of React',
+      welcome: '30 Days Of React',
       title: 'Getting Started React',
       subtitle: 'JavaScript Library',
       author: {
