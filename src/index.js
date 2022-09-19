@@ -3,6 +3,29 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import countries from './data/countries_data_old.js'
 
+// Fuction to show month date year
+const showDate = (time) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
+  const month = months[time.getMonth()].slice(0, 3)
+  const year = time.getFullYear()
+  const date = time.getDate()
+  return ` ${month} ${date}, ${year}`
+}
+
 // class based component
 class Header extends React.Component {
   constructor(props) {
@@ -147,6 +170,28 @@ class App extends React.Component {
   randomNum = () => {
     return Math.floor(Math.random()*251);
   }
+  //Date Function
+  showDate = (time) => {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+
+    const month = months[time.getMonth()].slice(0, 3)
+    const year = time.getFullYear()
+    const date = time.getDate()
+    return ` ${month} ${date}, ${year}`
+  }
   render() {
     const data = {
       welcome: '30 Days Of React',
@@ -156,7 +201,7 @@ class App extends React.Component {
         firstName: 'Javiera',
         lastName: 'Rico',
       },
-      date: 'Sep 18, 2022',
+      date: this.showDate(new Date()),
       select: 'Select a country for your next holiday',
     }
     const maindata = { 
